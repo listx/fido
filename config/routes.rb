@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
-
-  resources :users
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
+  # HTTP REQ  | URL     | Named route | Action  | Purpose
+  # GET       | /login  | login_path  | new     | page for a new session (login)
+  # POST      | /login  | login_path  | create  | create a new session (login)
+  # DELETE    | /logout | logout_path | destroy | delete a new session (logout)
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
+
+  resources :users
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
