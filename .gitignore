@@ -15,3 +15,5 @@ vendor
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+feature-doc.html
