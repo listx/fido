@@ -22,4 +22,6 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<% if logged_in? && admin_user? %>
+  <%= link_to 'New User', new_user_path %>
+<% end %>

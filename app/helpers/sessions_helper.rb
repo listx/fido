@@ -22,9 +22,13 @@ module SessionsHelper
   end
 
   def admin_user
-    if Role.find_by(id: current_user.role_id).description == "site_admin"
+    if admin_user?
     else
       redirect_to root_url
     end
+  end
+
+  def admin_user?
+    Role.find_by(id: current_user.role_id).description == "site_admin"
   end
 end
