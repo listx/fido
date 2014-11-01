@@ -11,3 +11,13 @@ Role.delete_all
 
 Role.create! description: "site_admin"
 Role.create! description: "author"
+
+User.create! name: "site_admin",
+  password: "f",
+  password_confirmation: "f",
+  role_id: ROLE_ADMIN
+
+User.create! name: "ff",
+  password: "f",
+  password_confirmation: "f",
+  role_id: ROLE_AUTHOR
