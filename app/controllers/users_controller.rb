@@ -16,7 +16,15 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.order(:name)
+    # FIXME: if logged in as an author, only show own user's crUd stuff; for
+    # admins, show all CRUD operations for all users
+    if logged_in?
+      @users = User.order(:name)
+    else
+      respond_to do |format|
+        format.html { redirect_to root_url, notice: 'Cannot view all users.' }
+      end
+    end
   end
 
   # GET /users/1
