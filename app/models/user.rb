@@ -5,4 +5,11 @@ class User < ActiveRecord::Base
     uniqueness: {case_sensitive: false}
   has_secure_password
   belongs_to :role
+  before_save :default_values
+
+  ROLE_AUTHOR = 2
+
+  def default_values
+    self.role_id ||= ROLE_AUTHOR
+  end
 end
