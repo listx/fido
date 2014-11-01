@@ -1,5 +1,14 @@
 class UsersController < ApplicationController
+  # Set the '@user' variable when dealing with the #show, #edit, etc. actions.
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+
+  # Required a user to be logged in to go ahead with the #edit, #update, and
+  # #destroy actions.
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
+
+  # On top of being logged in, the user must be the *correct* user in order to
+  # go through with the #edit, #update, and #destroy actions.
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -70,5 +79,21 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :password, :password_confirmation)
+    end
+
+    def logged_in_user
+      if !logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+
+    def correct_user
+      @user = User.find(params[:id])
+      flash[:danger] = @user.name.to_s
+      if !(current_user? @user)
+        flash.now[:danger] = "Please log in as #{@user.name}."
+        redirect_to root_url
+      end
     end
 end
