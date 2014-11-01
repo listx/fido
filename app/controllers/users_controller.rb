@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   # Required a user to be logged in to go ahead with the #edit, #update, and
   # #destroy actions.
-  before_action :logged_in_user, only: [:edit, :update, :destroy]
+  before_action :logged_in_user, only: [:new, :edit, :update, :destroy]
 
   # On top of being logged in, the user must be the *correct* user in order to
   # go through with the #edit, #update, and #destroy actions.
