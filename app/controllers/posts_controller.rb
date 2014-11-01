@@ -8,7 +8,14 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    if logged_in?
+      # FIXME: only show own (authored) posts; for admins, show all posts
+      @posts = Post.all
+    else
+      respond_to do |format|
+        format.html { redirect_to root_url, notice: 'Cannot view all posts.' }
+      end
+    end
   end
 
   # GET /posts/1
