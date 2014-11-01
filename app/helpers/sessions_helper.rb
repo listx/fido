@@ -20,4 +20,11 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
   end
+
+  def admin_user
+    if Role.find_by(id: current_user.role_id).description == "site_admin"
+    else
+      redirect_to root_url
+    end
+  end
 end

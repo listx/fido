@@ -8,7 +8,10 @@ class UsersController < ApplicationController
 
   # On top of being logged in, the user must be the *correct* user in order to
   # go through with the #edit, #update, and #destroy actions.
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update]
+
+  # Only admin users can destroy other users.
+  before_action :admin_user, only: [:destroy]
 
   # GET /users
   # GET /users.json
