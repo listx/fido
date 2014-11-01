@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# Populate standard roles
+Role.delete_all
+
+Role.create! description: "site_admin"
+Role.create! description: "author"
