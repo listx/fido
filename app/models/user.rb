@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
     uniqueness: {case_sensitive: false}
   has_secure_password
   belongs_to :role
+  has_many :posts
   before_save :default_values
 
   ROLE_AUTHOR = 2
