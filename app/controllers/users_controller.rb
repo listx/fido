@@ -10,8 +10,8 @@ class UsersController < ApplicationController
   # go through with the #edit, #update, and #destroy actions.
   before_action :correct_user, only: [:edit, :update]
 
-  # Only admin users can destroy other users.
-  before_action :admin_user, only: [:destroy]
+  # Only admin users can create/destroy other users.
+  before_action :admin_user, only: [:new, :destroy]
 
   # GET /users
   # GET /users.json
