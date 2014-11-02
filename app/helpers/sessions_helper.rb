@@ -31,4 +31,20 @@ module SessionsHelper
   def admin_user?
     Role.find_by(id: current_user.role_id).description == "site_admin"
   end
+
+  def logged_in_user
+    if !logged_in?
+      flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
+  end
+
+  def correct_user
+    @user = User.find(params[:id])
+    flash[:danger] = @user.name.to_s
+    if !(current_user? @user)
+      flash.now[:danger] = "Please log in as #{@user.name}."
+      redirect_to root_url
+    end
+  end
 end
