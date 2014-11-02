@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   def index
     if logged_in?
       # FIXME: only show own (authored) posts; for admins, show all posts
-      @posts = admin_user? ? Post.all : Post.where(id: current_user.id)
+      @posts = admin_user? ? Post.all : Post.where(author: current_user.id)
       @is_admin = admin_user?
     else
       respond_to do |format|
