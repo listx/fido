@@ -26,7 +26,9 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new author: current_user.id
+    @post = Post.new\
+      author: current_user.id,
+      published: true
   end
 
   # GET /posts/1/edit
