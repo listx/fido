@@ -1,16 +1,14 @@
-<div id="sidebar">
-  <nav>
-    <ul>
-      <% if logged_in? %>
-        <li><%= link_to "Dashboard", dashboard_path %></li>
-        <li><%= link_to "Posts", posts_path %></li>
-        <% if admin_user? %>
-          <li><%= link_to "Users", users_path %></li>
-        <% end %>
-        <li><%= link_to "Log out", logout_path, method: "delete" %></li>
-      <% else %>
-        <li><%= link_to "Log in", login_path %></li>
+<nav>
+  <ul>
+    <% if logged_in? %>
+      <li><%= link_to "Dashboard", dashboard_path %></li>
+      <li><%= link_to "Posts", posts_path %></li>
+      <% if admin_user? %>
+        <li><%= link_to "Users", users_path %></li>
       <% end %>
-    </ul>
-  </nav>
-</div>
+      <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+    <% else %>
+      <li><%= link_to "Log in", login_path %></li>
+    <% end %>
+  </ul>
+</nav>
