@@ -7,7 +7,9 @@
   <table>
     <thead>
       <tr>
-        <th>Author</th>
+        <% if @is_admin %>
+          <th>Author</th>
+        <% end %>
         <th>Title</th>
         <th>Body</th>
         <th>Published</th>
@@ -17,7 +19,9 @@
     <tbody>
       <% @posts.each do |post| %>
         <tr>
-          <td><%= post.author %></td>
+          <% if @is_admin %>
+            <td><%= post.author %></td>
+          <% end %>
           <td><%= post.title %></td>
           <td><%= post.body %></td>
           <td><%= post.published %></td>
