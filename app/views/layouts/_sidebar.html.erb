@@ -2,6 +2,7 @@
   <% if logged_in? %>
     <p>&bull;&nbsp;<%= link_to "Dashboard", dashboard_path %></p>
     <p>&bull;&nbsp;<%= link_to "Posts", posts_path %></p>
+    <p>&bull;&nbsp;<%= link_to 'New Post', new_post_path %></p>
     <% if admin_user? %>
       <p>&bull;&nbsp;<%= link_to "Users", users_path %></p>
     <% end %>

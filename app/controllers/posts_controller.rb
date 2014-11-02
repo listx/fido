@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   def index
     if logged_in?
       # FIXME: only show own (authored) posts; for admins, show all posts
-      @posts = Post.all
+      @posts = admin_user? ? Post.all : Post.find_by(id: current_user.id)
     else
       respond_to do |format|
         format.html { redirect_to root_url, notice: 'Cannot view all posts.' }
