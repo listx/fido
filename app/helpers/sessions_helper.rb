@@ -40,7 +40,7 @@ module SessionsHelper
   end
 
   def correct_user
-    @user = User.find(params[:id])
+    @user = User.find(current_user.id)
     flash[:danger] = @user.name.to_s
     if !(current_user? @user)
       flash.now[:danger] = "Please log in as #{@user.name}."
