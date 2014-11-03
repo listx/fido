@@ -5,8 +5,6 @@ class PostsController < ApplicationController
 
   before_action :correct_user, only: [:edit, :update, :destroy]
 
-  before_action :admin_user, only: [:destroy]
-
   # GET /posts
   # GET /posts.json
   def index
