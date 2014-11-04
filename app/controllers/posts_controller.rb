@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   def index
     if logged_in?
       # FIXME: only show own (authored) posts; for admins, show all posts
-      @posts = admin_user? ? Post.all : Post.where(author: current_user.id)
+      @posts = admin_user? ? Post.all : Post.where(user_id: current_user.id)
       @is_admin = admin_user?
     else
       respond_to do |format|
@@ -38,7 +38,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params.merge!\
-      author: current_user.id
+      user_id: current_user.id
     )
 
     respond_to do |format|
@@ -84,6 +84,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:author, :title, :body, :published)
+      params.require(:post).permit(:user_id, :title, :body, :published)
     end
 end

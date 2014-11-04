@@ -20,7 +20,7 @@
       <% @posts.each do |post| %>
         <tr>
           <% if @is_admin %>
-            <td><%= post.author %></td>
+            <td><%= post.user_id %></td>
           <% end %>
           <td><%= post.title %></td>
           <td><%= post.body %></td>

@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  author: 1
+  user_id: 2
   title: MyString
   body: MyText
   published: false
 
 two:
-  author: 1
+  user_id: 2
   title: MyString
   body: MyText
   published: false
