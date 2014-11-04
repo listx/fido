@@ -91,4 +91,13 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :password, :password_confirmation)
     end
+
+    def correct_user
+      @user = User.find(current_user.id)
+      flash[:danger] = @user.name.to_s
+      if !(current_user? @user)
+        flash.now[:danger] = "Please log in as #{@user.name}."
+        redirect_to root_url
+      end
+    end
 end

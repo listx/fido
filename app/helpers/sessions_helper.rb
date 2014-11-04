@@ -38,13 +38,4 @@ module SessionsHelper
       redirect_to login_url
     end
   end
-
-  def correct_user
-    @user = User.find(current_user.id)
-    flash[:danger] = @user.name.to_s
-    if !(current_user? @user)
-      flash.now[:danger] = "Please log in as #{@user.name}."
-      redirect_to root_url
-    end
-  end
 end
