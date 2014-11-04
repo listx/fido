@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20141101055152) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "role_id"
+    t.integer  "role_id",         default: 2
   end
 
 end
