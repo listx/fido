@@ -27,6 +27,7 @@ User.create! name: "ff",
 srand 12345
 
 FAKE_USERS_CNT = 120
+FAKE_POSTS_CNT = 4000
 
 # Create fake users
 FAKE_USERS_CNT.times do
@@ -40,15 +41,20 @@ FAKE_USERS_CNT.times do
 end
 
 # Select fake (regular, non-admin) users at random, and have them create posts.
-posts_total = 4000
+posts_total = FAKE_POSTS_CNT
 while posts_total > 0 do
   # Add 2, to skip over site_admin and 'ff'; we add 1 to `rand FAKE_USERS_CNT`
   # b/c SQL rows start by counting at 1
   user_id = 2 + ((rand FAKE_USERS_CNT) + 1)
-  # Choose the number of posts this person will create; up to 200 posts
-  post_cnt = rand 200
+  # Choose the number of posts this person will create at this instance. If we
+  # just do FAKE_POSTS_CNT / FAKE_USERS_CNT, this number is the average number
+  # of posts per user, if every user posted the same number of posts. We divide
+  # this by 4 here, just so that the posts are spread across more users
+  # (essentially, this reduces the chance that we will end up with many users
+  # who have no posts at all).
+  post_cnt = rand (FAKE_POSTS_CNT / FAKE_USERS_CNT / 2)
   post_cnt.times do
-    ps = 1 + (rand 15)
+    paragraphs_cnt = 1 + (rand 15)
     tc = Faker::Time.between(600.days.ago, Time.now)
     tu = tc
     if rand(2) == 0
@@ -57,7 +63,7 @@ while posts_total > 0 do
     Post.create!\
       user_id: user_id,
       title: Faker::Lorem.sentence[0..254],
-      body: Faker::Lorem.paragraphs(ps).join("\n\n"),
+      body: Faker::Lorem.paragraphs(paragraphs_cnt).join("\n\n"),
       published: rand(2) == 0,
       created_at: tc,
       updated_at: tu
