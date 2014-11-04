@@ -4,6 +4,7 @@
 <% if @posts.nil? %>
   <p>No posts.</p>
 <% else %>
+  <%= will_paginate %>
   <table>
     <thead>
       <tr>
@@ -32,4 +33,5 @@
       <% end %>
     </tbody>
   </table>
+  <%= will_paginate %>
 <% end %>

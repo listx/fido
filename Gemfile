@@ -32,6 +32,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Generate fake data (for development)
 gem 'faker'
 
+# Pagination of list items
+gem 'will_paginate'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
