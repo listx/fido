@@ -1,24 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Author:</strong>
-  <%= @user.name %>
-</p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<h2 class="title"><%= @post.title %></h2>
 
-<p>
-  <strong>Body:</strong>
-  <%= @post.body %>
+<p>-- posted by
+  <span class="author"><%= @user.name %></span>
+  on
+  <span class="date"><%= @post.created_at.to_formatted_s(:long_ordinal) %></span>
 </p>
-
+<hr>
 <p>
-  <strong>Published:</strong>
-  <%= @post.published %>
+<%= simple_format @post.body %>
 </p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>

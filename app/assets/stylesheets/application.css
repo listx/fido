@@ -39,3 +39,7 @@ textarea#post_body {
   font-family: monospace;
   font-size: 1em;
 }
+
+h2.title {
+  text-decoration: underline;
+}
