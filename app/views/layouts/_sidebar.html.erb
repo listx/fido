@@ -1,13 +1,13 @@
 <nav>
   <% if logged_in? %>
-    <p>&bull;&nbsp;<%= link_to "Dashboard", dashboard_path %></p>
-    <p>&bull;&nbsp;<%= link_to "Posts", posts_path %></p>
-    <p>&bull;&nbsp;<%= link_to 'New Post', new_post_path %></p>
+    <div class="level0"><%= link_to "Dashboard", dashboard_path %></div>
+    <div class="level0"><%= link_to "Posts", posts_path %></div>
+    <div class="level0"><%= link_to "New Post", new_post_path %></div>
     <% if admin_user? %>
-      <p>&bull;&nbsp;<%= link_to "Users", users_path %></p>
+      <div class="level0"><%= link_to "Users", users_path %></div>
     <% end %>
-    <p>&bull;&nbsp;<%= link_to "Log out", logout_path, method: "delete" %></p>
+    <div class="level0"><%= link_to "Log out", logout_path, method: "delete" %></div>
   <% else %>
-    <p>&bull;&nbsp;<%= link_to "Log in", login_path %></p>
+    <div class="level0"><%= link_to "Log in", login_path %></p>
   <% end %>
 </nav>

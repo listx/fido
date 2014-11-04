@@ -1,9 +1,10 @@
-<p id="notice"><%= notice %></p>
+<% if !notice.nil? %>
+  <p id="notice"><%= notice %></p>
+<% end %>
 
+<h1 class="title"><%= @post.title %></h2>
 
-<h2 class="title"><%= @post.title %></h2>
-
-<p>-- posted by
+<p class="post-meta">by
   <span class="author"><%= @user.name %></span>
   on
   <span class="date"><%= @post.created_at.to_formatted_s(:long_ordinal) %></span>

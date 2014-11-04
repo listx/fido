@@ -13,33 +13,3 @@
  *= require_tree .
  *= require_self
  */
-
-body {
-  display: table;
-  height: 100%;
-}
-
-div#sidebar {
-  display: table-cell;
-  padding: 1em;
-  background-color: #ccffff;
-}
-
-div#content-yield {
-  display: table-cell;
-  padding: 1em;
-}
-
-input#post_title {
-  font-family: monospace;
-  font-size: 1em;
-}
-
-textarea#post_body {
-  font-family: monospace;
-  font-size: 1em;
-}
-
-h2.title {
-  text-decoration: underline;
-}

@@ -35,6 +35,9 @@ gem 'faker'
 # Pagination of list items
 gem 'will_paginate'
 
+# Saner CSS manipulation
+gem 'sass'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
