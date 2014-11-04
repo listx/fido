@@ -23,7 +23,7 @@
             <td><%= post.user_id %></td>
           <% end %>
           <td><%= post.title %></td>
-          <td><%= post.body %></td>
+          <td><%= truncate post.body %></td>
           <td><%= post.published %></td>
           <td><%= link_to 'Show', post %></td>
           <td><%= link_to 'Edit', edit_post_path(post) %></td>
