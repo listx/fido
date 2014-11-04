@@ -29,3 +29,13 @@ div#content-yield {
   display: table-cell;
   padding: 1em;
 }
+
+input#post_title {
+  font-family: monospace;
+  font-size: 1em;
+}
+
+textarea#post_body {
+  font-family: monospace;
+  font-size: 1em;
+}
