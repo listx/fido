@@ -12,6 +12,7 @@
         <% end %>
         <th>Title</th>
         <th>Body</th>
+        <th>Date</th>
         <th>Published</th>
         <th colspan="3"></th>
       </tr>
@@ -24,6 +25,7 @@
           <% end %>
           <td><%= truncate post.title %></td>
           <td><%= truncate post.body %></td>
+          <td><%= post.created_at %></td>
           <td><%= post.published %></td>
           <td><%= link_to 'Show', post %></td>
           <td><%= link_to 'Edit', edit_post_path(post) %></td>
