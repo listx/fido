@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141101055152) do
+ActiveRecord::Schema.define(version: 20141104182553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20141101055152) do
 
   create_table "tenants", force: true do |t|
     t.string   "name"
-    t.integer  "admin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -43,7 +42,8 @@ ActiveRecord::Schema.define(version: 20141101055152) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "role_id",         default: 2
+    t.integer  "role_id",         default: 3
+    t.integer  "tenant_id",       default: 1
   end
 
 end

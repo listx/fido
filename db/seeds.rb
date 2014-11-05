@@ -10,34 +10,54 @@
 Role.delete_all
 
 Role.create! description: "site_admin"
+Role.create! description: "tenant_admin"
 Role.create! description: "author"
 
-User.create! name: "site_admin",
+User.create! name: "sa",
   password: "f",
   password_confirmation: "f",
+  tenant_id: 1, # this is not used for site admins
   role_id: ROLE_ADMIN
+
+User.create! name: "ta",
+  password: "f",
+  password_confirmation: "f",
+  tenant_id: 1,
+  role_id: ROLE_TENANT_ADMIN
 
 User.create! name: "ff",
   password: "f",
   password_confirmation: "f",
+  tenant_id: 1,
   role_id: ROLE_AUTHOR
 
 # Set seed value; Faker, like Ruby's built-in Random#rand, depends on the state
 # of the system PRNG.
 srand 12345
 
-FAKE_USERS_CNT = 120
-FAKE_POSTS_CNT = 4000
+FAKE_TENANTS_CNT = 5
+FAKE_USERS_CNT = 30
+FAKE_POSTS_CNT = 1000
 
-# Create fake users
+FAKE_TENANTS_CNT.times do |n|
+  Tenant.create!\
+    name: Faker::Commerce.department(1)
+end
+
+# Create fake users; there are 3 classes of users: site admins (who have power
+# over everyone else), tenant admins (who have power only over the regular users
+# that are from their own tenancy), and regular users (who have a tenant_id, and
+# whose content are always associated with this tenant). The tenant_id only matters for tenant admins and regular users (site admins overrule all tenants, so it does not make sense for them to have a tenant id).
 FAKE_USERS_CNT.times do
   name = Faker::Internet.user_name
   password = "f"
+  reg_user = (rand 10) > 0
   User.create!\
     name: name,
     password: password,
     password_confirmation: password,
-    role_id: ROLE_AUTHOR
+    tenant_id: 1 + (rand FAKE_TENANTS_CNT),
+    role_id: reg_user ? ROLE_AUTHOR : ROLE_TENANT_ADMIN
 end
 
 # Select fake (regular, non-admin) users at random, and have them create posts.

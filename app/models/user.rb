@@ -5,5 +5,6 @@ class User < ActiveRecord::Base
     uniqueness: {case_sensitive: false}
   has_secure_password
   belongs_to :role
+  belongs_to :tenant
   has_many :posts
 end
