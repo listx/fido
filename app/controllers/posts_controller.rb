@@ -22,6 +22,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @tenants = Tenant.all
     @user = User.find(@post.user_id)
   end
 
