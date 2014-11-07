@@ -11,7 +11,11 @@ class PostsController < ApplicationController
     if logged_in?
       # FIXME: only show own (authored) posts; for admins, show all posts
       @posts = admin_user? ? Post.all : Post.where(user_id: current_user.id)
-      @posts = @posts.order(published: :asc, created_at: :desc).paginate(page: params[:page])
+      if !params[:sort].nil?
+        @posts = @posts.order(params[:sort] => params[:dir].to_sym)
+      end
+      date_dir = (params[:date_dir] || :desc).to_sym
+      @posts = @posts.order(published: :asc, created_at: date_dir).paginate(page: params[:page])
       @is_admin = admin_user?
     else
       respond_to do |format|
