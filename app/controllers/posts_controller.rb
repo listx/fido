@@ -41,7 +41,8 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params.merge!\
-      user_id: current_user.id
+      user_id: current_user.id,
+      tenant_id: current_user.tenant_id
     )
 
     respond_to do |format|
