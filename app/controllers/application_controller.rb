@@ -4,4 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include SessionsHelper
+
+  def tenants_sorted
+    Tenant.all.sort { |a,b| a.name <=> b.name }
+  end
 end
