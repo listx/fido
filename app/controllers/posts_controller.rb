@@ -92,7 +92,11 @@ class PostsController < ApplicationController
     end
 
     def correct_user
-      @post = current_user.posts.find_by(id: params[:id])
+      if admin_user?
+        @post = Post.find(params[:id])
+      else
+        @post = current_user.posts.find(params[:id])
+      end
       if @post.nil?
         redirect_to posts_url
       end
