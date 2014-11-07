@@ -3,7 +3,7 @@
   <% if @tenants %>
     <div class="level0 tenant-header">Departments</div>
     <% @tenants.each do |t| %>
-      <div class="level0 tenant-name"><%= link_to t.name, dashboard_path %></div>
+      <div class="level0 tenant-name"><%= link_to t.name, tenants_path(name: t.name) %></div>
     <% end %>
   <% end %>
   <% if logged_in? %>

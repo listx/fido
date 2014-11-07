@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'tenants/show'
-
   resources :posts
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -17,6 +15,9 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   get 'dashboard' => 'dashboard#index'
+
+  get 'tenants' => 'tenants#index'
+  get 'tenants/show'
 
   resources :users
   # Example of regular route:
