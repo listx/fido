@@ -23,7 +23,7 @@
             <td><%= post.user_id %></td>
           <% end %>
           <td class="post-title"><%= link_to (truncate post.title), post %></td>
-          <td class="post-date"><%= post.created_at.to_formatted_s(:short) %></td>
+          <td class="post-date"><%= post.created_at.strftime("%Y-%m-%d") %></td>
           <td class=
           <%= post.published ? "pub-yes" : "pub-no" %>
             >

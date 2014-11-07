@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  include PostsHelper
   belongs_to :user
 
   validates :title, :body, presence: true

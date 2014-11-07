@@ -7,7 +7,7 @@
 <div>
   <% @posts.sort {|a, b| b.created_at <=> a.created_at }.each do |post| %>
       <h2 class="post-title"><%= link_to post.title, post %></h2>
-      <p class="post-date"><%= post.created_at.to_formatted_s(:long) %></p>
+      <p class="post-date"><%= post.date_posted %></p>
       <p class="post-body">
         <% post_body_trunc, link = truncate_paragraph(post.body, post) %>
         <%= simple_format(truncate(post_body_trunc,
