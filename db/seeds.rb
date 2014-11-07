@@ -82,6 +82,7 @@ while posts_total > 0 do
     end
     Post.create!\
       user_id: user_id,
+      tenant_id: User.find(user_id).tenant_id,
       title: Faker::Lorem.sentence[0..254],
       body: Faker::Lorem.paragraphs(paragraphs_cnt).join("\n\n"),
       published: rand(2) == 0,
