@@ -38,6 +38,9 @@ gem 'will_paginate'
 # Saner CSS manipulation
 gem 'sass'
 
+# Saner HTML manipulation
+gem 'haml'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

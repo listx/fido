@@ -1,0 +1,11 @@
+%h1 Log in
+
+- flash.each do |msg_type, msg|
+  .alert{class: "alert-#{ msg_type}"}= msg
+
+= form_for(:session, url: login_path) do |f|
+  = f.label :username
+  = f.text_field :name
+  = f.label :password
+  = f.password_field :password
+  = f.submit "Log in"

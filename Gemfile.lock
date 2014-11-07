@@ -41,6 +41,8 @@ GEM
     execjs (2.2.2)
     faker (1.4.3)
       i18n (~> 0.5)
+    haml (4.0.5)
+      tilt
     hike (1.2.3)
     i18n (0.6.11)
     jbuilder (2.2.4)
@@ -115,6 +117,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   coffee-rails (~> 4.0.0)
   faker
+  haml
   jbuilder (~> 2.0)
   jquery-rails
   pg

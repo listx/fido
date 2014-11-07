@@ -1,0 +1,18 @@
+- if !notice.nil?
+  %p#notice= notice
+
+%h1
+  &bull;&nbsp;
+  = @tenant.name
+
+%h2.title= @post.title
+
+%p
+  %span.post-meta
+    by
+    %span.author= @user.name
+    &bull;
+    %span.date= @post.date_posted
+%hr
+
+%p= simple_format @post.body

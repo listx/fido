@@ -1,0 +1,15 @@
+%nav
+  .level0= link_to raw("FIDO&nbsp;Company&nbsp;Blog"), root_path
+  - if @tenants
+    .level0.tenant-header Departments
+    - @tenants.each do |t|
+      .level0.tenant-name= link_to t.name, tenants_path(name: t.name)
+  - if logged_in?
+    .level0= link_to "Dashboard", dashboard_path
+    .level0= link_to "Posts", posts_path
+    .level0= link_to "New Post", new_post_path
+    - if admin_user?
+      .level0= link_to "Users", users_path
+    .level0= link_to "Log out", logout_path, method: "delete"
+  - else
+    .level0= link_to "Log in", login_path
