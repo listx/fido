@@ -4,4 +4,12 @@ class Post < ActiveRecord::Base
 
   validates :title, :body, presence: true
   validates :title, length: { maximum: 255 }
+
+  def self.search(search)
+    if search
+      where('title LIKE ?', "%#{search}%")
+    else
+      where(nil)
+    end
+  end
 end

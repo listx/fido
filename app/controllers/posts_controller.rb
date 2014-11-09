@@ -9,8 +9,11 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     if logged_in?
+      @posts = Post.search(params[:search])
       # FIXME: only show own (authored) posts; for admins, show all posts
-      @posts = admin_user? ? Post.all : Post.where(user_id: current_user.id)
+      if !admin_user?
+        @posts = @posts.where(user_id: current_user.id)
+      end
       if !params[:sort].nil?
         @posts = @posts.order(params[:sort] => params[:dir].to_sym)
       end
