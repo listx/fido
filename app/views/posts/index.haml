@@ -4,6 +4,8 @@
 = form_tag posts_path, method: 'get' do
   %p
     = text_field_tag :search, params[:search]
+    = check_box_tag(:title_body)
+    = label_tag(:title_body, "Search title and body")
     = submit_tag "Search", name: nil
 
 - if @posts.nil?
