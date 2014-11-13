@@ -44,6 +44,8 @@ FAKE_TENANTS_CNT.times do |n|
     name: Faker::Commerce.department(1)
 end
 
+print "Creating users..."
+
 # Create fake users; there are 3 classes of users: site admins (who have power
 # over everyone else), tenant admins (who have power only over the regular users
 # that are from their own tenancy), and regular users (who have a tenant_id, and
@@ -60,8 +62,14 @@ FAKE_USERS_CNT.times do
     role_id: reg_user ? ROLE_AUTHOR : ROLE_TENANT_ADMIN
 end
 
+puts "done"
+puts "Creating posts..."
+
 # Select fake (regular, non-admin) users at random, and have them create posts.
 posts_total = FAKE_POSTS_CNT
+posts_cnt_total = 0
+posts_checkpoint = 0
+denom = 10
 while posts_total > 0 do
   # Add 2, to skip over site_admin and 'ff'; we add 1 to `rand FAKE_USERS_CNT`
   # b/c SQL rows start by counting at 1
@@ -90,4 +98,13 @@ while posts_total > 0 do
       updated_at: tu
   end
   posts_total -= post_cnt
+  posts_cnt_total += post_cnt
+
+  checkpoint_maybe = posts_cnt_total / (FAKE_POSTS_CNT / denom)
+  if checkpoint_maybe > posts_checkpoint
+    posts_checkpoint = checkpoint_maybe
+    puts "#{checkpoint_maybe * denom}% complete"
+  end
 end
+
+print "done"
