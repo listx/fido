@@ -32,8 +32,8 @@ format = "png"
 
 plot_cmd = %{\
 set term #{format} small
-set title "Benchmark of page\\n\
-#{url}"
+set title "Benchmark using 'ab'\\n\
+DB schema version #{version}"
 set xlabel "request"
 set ylabel "ms"
 set size 1,0.5
