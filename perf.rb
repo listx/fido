@@ -17,14 +17,16 @@ outfile_data = "out.perf.#{version}.#{url.to_s.gsub(/\//, "!")}.#{t}.data.txt"
 outfile_meta = "out.perf.#{version}.#{url.to_s.gsub(/\//, "!")}.#{t}.meta.txt"
 outfile_pict = "out.perf.#{version}.#{url.to_s.gsub(/\//, "!")}.#{t}.pict.png"
 
-# Command arguments to ab
-# -k Enable the HTTP KeepAlive feature, i.e., perform multiple requests within
-#    one HTTP session.
-# -c concurrency: Number of multiple requests to perform at a time.
-# -n requests: Number of requests to perform for the benchmarking session.
-# -g gnuplot-compatible output
-sh.system("ab -k -c 10 -n 100 -g #{outfile_data} #{url}") > outfile_meta
-puts "Finished running ab"
+if !ARGV[1].nil?
+  # Command arguments to ab
+  # -k Enable the HTTP KeepAlive feature, i.e., perform multiple requests within
+  #    one HTTP session.
+  # -c concurrency: Number of multiple requests to perform at a time.
+  # -n requests: Number of requests to perform for the benchmarking session.
+  # -g gnuplot-compatible output
+  sh.system("ab -k -c 1 -n 1000 -g '#{outfile_data}' #{url}") > outfile_meta
+  puts "Finished running ab"
+end
 
 puts "Generating gnuplot graph..."
 
@@ -32,13 +34,13 @@ format = "png"
 
 plot_cmd = %{\
 set term #{format} small
-set title "Benchmark using 'ab'\\n\
-DB schema version #{version}"
+set title "benchmark using 'ab'\\n\
+db schema version #{version}"
 set xlabel "request"
 set ylabel "ms"
 set size 1,0.5
 set key left top
-plot "#{outfile_data}" using 10 with lines title "#{url}"
+plot "#{outfile_data.gsub(/\\/, "\\\\\\\\")}" using 10 with lines title "#{url}"
 }
 
 sh.echo(plot_cmd) | sh.system("gnuplot") > outfile_pict
