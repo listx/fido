@@ -29,7 +29,8 @@ module SessionsHelper
   end
 
   def admin_user?
-    Role.find_by(id: current_user.role_id).description == "site_admin"
+    Rails.env.development? || \
+    (Role.find_by(id: current_user.role_id).description == "site_admin")
   end
 
   def logged_in_user

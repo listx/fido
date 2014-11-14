@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    if logged_in?
+    if Rails.env.development? || logged_in?
       @posts = Post.search(params[:search], params[:title_body])
       # FIXME: only show own (authored) posts; for admins, show all posts
       if !admin_user?
