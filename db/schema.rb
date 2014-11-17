@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20141112074439) do
 
   create_table "posts", force: true do |t|
     t.integer  "user_id"
-    t.integer  "tenant_id"
+    t.binary   "tenant_oid"
     t.string   "title"
     t.text     "body"
     t.boolean  "published"
@@ -27,16 +27,10 @@ ActiveRecord::Schema.define(version: 20141112074439) do
   end
 
   add_index "posts", ["published"], name: "index_posts_on_published", where: "(published = true)", using: :btree
-  add_index "posts", ["tenant_id"], name: "index_posts_on_tenant_id", using: :btree
+  add_index "posts", ["tenant_oid"], name: "index_posts_on_tenant_oid", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tenants", force: true do |t|
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,7 +39,7 @@ ActiveRecord::Schema.define(version: 20141112074439) do
     t.string   "name"
     t.string   "password_digest"
     t.integer  "role_id",         default: 3
-    t.integer  "tenant_id"
+    t.binary   "tenant_oid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

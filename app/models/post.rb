@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
 
   validates :title, :body, presence: true
   validates :title, length: { maximum: 255 }
+  has_objectid_columns
 
   def self.search(search, title_body)
     if search

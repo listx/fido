@@ -4,7 +4,7 @@
     %p
       %span.post-meta
         - u = User.find(post.user_id)
-        %span.post-tenant= Tenant.find(u.tenant_id).name
+        %span.post-tenant= Tenant.find(u.tenant_oid).name
         &bull;
         %span.post-date= User.find(post.user_id).name
         &bull;

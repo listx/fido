@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def tenants_sorted
-    Tenant.all.sort { |a,b| a.name <=> b.name }
+    Tenant.all.to_a.sort { |a,b| a.name <=> b.name }
   end
 end

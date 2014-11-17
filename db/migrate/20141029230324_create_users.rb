@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :password_digest
       t.integer :role_id, default: ROLE_AUTHOR
-      t.integer :tenant_id
+      t.binary :tenant_oid
 
       t.timestamps
     end

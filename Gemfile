@@ -52,3 +52,4 @@ gem 'haml'
 
 gem 'mongoid'
 gem 'bson_ext'
+gem 'objectid_columns'

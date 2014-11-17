@@ -31,7 +31,7 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @tenants = tenants_sorted
-    @tenant = Tenant.find(@post.tenant_id)
+    @tenant = Tenant.find(@post.tenant_oid)
     @user = User.find(@post.user_id)
   end
 
@@ -50,7 +50,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params.merge!\
       user_id: current_user.id,
-      tenant_id: current_user.tenant_id
+      tenant_oid: current_user.tenant_oid
     )
 
     respond_to do |format|

@@ -7,4 +7,10 @@ class User < ActiveRecord::Base
   belongs_to :role
   belongs_to :tenant
   has_many :posts
+  has_objectid_columns
+
+  # We write a method to simulate the AR 'belongs_to tenant' declaration
+  def tenant
+    Tenant.find(self.tenant_oid)
+  end
 end
