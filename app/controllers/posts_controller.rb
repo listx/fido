@@ -18,7 +18,7 @@ class PostsController < ApplicationController
         @posts = @posts.order(params[:sort] => params[:dir].to_sym)
       end
       date_dir = (params[:date_dir] || :desc).to_sym
-      @posts = @posts.order(published: :asc, created_at: date_dir).paginate(page: params[:page])
+      @posts = @posts.order(published: :asc, created_at: date_dir).page(params[:page])
       @is_admin = admin_user?
     else
       respond_to do |format|
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @tenants = tenants_sorted
-    @tenant = Tenant.find(@post.tenant_oid)
+    @tenant = Tenant.find(@post.tenant_id)
     @user = User.find(@post.user_id)
   end
 
@@ -50,7 +50,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params.merge!\
       user_id: current_user.id,
-      tenant_oid: current_user.tenant_oid
+      tenant_id: current_user.tenant_oid
     )
 
     respond_to do |format|

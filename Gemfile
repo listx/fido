@@ -33,7 +33,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'faker'
 
 # Pagination of list items
-gem 'will_paginate'
+gem 'kaminari'
 
 # Saner CSS manipulation
 gem 'sass'

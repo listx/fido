@@ -1,17 +1,27 @@
-class Post < ActiveRecord::Base
+class Post
   include PostsHelper
-  belongs_to :user
+  include Mongoid::Document
+  include Mongoid::Timestamps
+
+  field :user_id, type: Integer # in postgres
+  field :tenant_id, type: BSON::ObjectId
+  field :title, type: String
+  field :body, type: String
+  field :published, type: Boolean
 
   validates :title, :body, presence: true
   validates :title, length: { maximum: 255 }
-  has_objectid_columns
 
-  def self.search(search, title_body)
-    if search
+  def self.search(pattern, title_body)
+    regex = Regexp.new(".*#{pattern}.*")
+    if pattern
       if title_body
-        where('title LIKE ? OR body LIKE ?', "%#{search}%", "%#{search}%")
+        any_of({title: regex}, {body: regex})
       else
-        where('title LIKE ?', "%#{search}%")
+        # We probably want to limit what kind of patterns are allowed --- we
+        # don't want a REGEX "injection attack" where a user puts in a tough
+        # regex that searches for *everything* (e.g., a letter 'a').
+        where(title: regex)
       end
     else
       where(nil)
