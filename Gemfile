@@ -49,3 +49,6 @@ gem 'haml'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'mongoid', '~> 4.0.0'
+gem 'bson_ext'
